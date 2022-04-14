@@ -12,7 +12,7 @@ I was not able to run Docker in my windows system, Though I have added all Steps
 Clone the Project in your Local system
 
 ```bash
-git clone <project.link>
+git clone https://github.com/yashnsharma/sse-btc-project/tree/master
 ```
 
 ## Usage
