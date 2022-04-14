@@ -1,0 +1,21 @@
+{
+  "name": "sse-btc-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "yash sharma",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "body-parser": "^1.20.0",
+    "cron": "^1.8.2",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "moment": "^2.29.2",
+    "mongoose": "^6.2.11",
+    "nodemailer": "^6.7.3"
+  }
+}
