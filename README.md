@@ -93,7 +93,15 @@ HTTP 400 Couldn't get all Coins
 
 Request : `POST http://localhost:8080/user/info`
 
-Request Body : `{ "email":"foo@foo.com", "min": 140, "max": 150};`
+Request Body :
+
+```
+{
+   "email":"foo@foo.com",
+   "min": 140,
+   "max": 150
+};
+```
 
 Successful Response : `HTTP 200 Updated User Info successfully`
 
