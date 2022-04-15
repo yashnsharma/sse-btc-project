@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 // async..await is not allowed in global scope, must use a wrapper
 async function main(user_email, mail_subject) {
@@ -7,8 +8,8 @@ async function main(user_email, mail_subject) {
     host: "smtp.mailtrap.io",
     port: 2525,
     auth: {
-      user: "a76c2316c76eec",
-      pass: "1ba1aa1faaa546",
+      user: process.env.EMAIL_USR,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
