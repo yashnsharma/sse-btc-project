@@ -63,6 +63,36 @@ npm start
 app starts running on port 8080
 ```
 
+# API Endpoints
+
+Request : GET http://localhost:8080/api/prices/btc?date=15-04-2022&limit=10&offset=0
+
+Success Response :
+HTTP 200
+{
+"url": "http://localhost:8080/api/prices/btc?date=15-04-2022&offset=0&limit=100",  
+ "next": "http://localhost:8080/api/prices/btc?date=15-04-2022&offset=100&limit=100",
+"count": 40,  
+ "data": [
+{
+"timestamp": "DD-MM-YYYY"
+"price": 140,
+"coin": "btc"
+},
+...
+],  
+}
+
+Failure Response :
+HTTP 400 Couldn't get all Coins
+
+Request : POST http://localhost:8080/user/info
+Request Body : { "email":"foo@foo.com", "min": 140, "max": 150};
+Successful Response : HTTP 200 Updated User Info successfully
+Failure Response : HTTP 500 Failed to update user info <error message>
+
+```
+
 ## Tech used
 
 Programming Language : Nodejs
@@ -78,3 +108,4 @@ Database : Mongodb
 6. nodemailer
 7. moment
 8. body-parser
+```
