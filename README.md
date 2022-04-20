@@ -19,6 +19,9 @@ npm install
 # cd into project
 cd sse-btc-project/
 
+# Install Packages
+npm install
+
 # Run Docker containers
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
