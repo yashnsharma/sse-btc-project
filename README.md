@@ -79,19 +79,7 @@ Successful Response : `HTTP 200 Updated User Info successfully`
 Failure Response : `HTTP 500 Failed to update user info <error message>`
 
 ```
-
-#
-
-Request Description : User Authentication & CRUD
-
-[Creates Auth ]User Login : `POST http://localhost:8080/api/v1/user/login` BODY : `{"username":"<username">, "password":"<password>"`
-[Requires Auth] Get User : `GET http://localhost:8080/api/v1/user/:id`
-[Requires Auth] Create Users : `POST http://localhost:8080/api/v1/user/` BODY : `{"username":"<username">, "password":"<password>"`
-
-
 Request Body :
-
-```
 
 {
 "email":"foo@foo.com",
@@ -105,6 +93,14 @@ Successful Response : `HTTP 200 Updated User Info successfully`
 
 Failure Response : `HTTP 500 Failed to update user info <error message>`
 
+#
+
+Request Description : User Authentication & CRUD
+
+```
+[Creates Auth ] User Login : `POST http://localhost:8080/api/v1/user/login` BODY : `{"username":"<username">, "password":"<password>"`
+[Requires Auth] Get User : `GET http://localhost:8080/api/v1/user/:id`
+[Requires Auth] Create Users : `POST http://localhost:8080/api/v1/user/` BODY : `{"username":"<username">, "password":"<password>"`
 ```
 
 ## Tech used
