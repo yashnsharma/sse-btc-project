@@ -1,21 +1,22 @@
 version: "3"
 services:
-  mongodb:
-    image: mongo
-    restart: unless-stopped
-    ports:
-      - 27017:27017
+  nginx:
+    image: nginx:stable-alpine
     volumes:
-      - db:/data/db
-  app:
-    depends_on:
-      - mongodb
-    build: ./src
-    restart: unless-stopped
-    env_file: ./.env
-    ports:
-      - 8080:8080
-    stdin_open: true
-    tty: true
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  sse-btc-app:
+    build: .
+    environment:
+      - PORT=4000
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=yash
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-db:/data/db
+  redis:
+    image: redis
+
 volumes:
-  db:
+  mongo-db:

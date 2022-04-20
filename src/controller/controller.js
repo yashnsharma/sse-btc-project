@@ -38,7 +38,7 @@ const getAllCoins = async (req, res) => {
 
   try {
     const allCoins = await coin
-      .find(dbQuery.timestmap ?? null, { _id: 0, __v: 0 })
+      .find(dbQuery.timestmap ? dbQuery.timestmap : null, { _id: 0, __v: 0 })
       .skip(dbQuery.offset)
       .limit(dbQuery.limit);
     responseBody.url = decodeURIComponent(responseBody.url);
@@ -89,8 +89,110 @@ const addPriceRecord = async () => {
   }
 };
 
+// CRUD
+
+const getSingleCoin = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const result = await coin.findById(id);
+
+    if (!result) {
+      return res.status(404).json({
+        status: "failed",
+        message: "Sorry, Could not find requested coin",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      data: result,
+    });
+  } catch (e) {
+    return res.status(400).json({
+      status: "failed",
+      message: "Failed to get coin due to : " + e,
+    });
+  }
+};
+
+const createCoin = async (req, res) => {
+  const body = req.body;
+  const newCoin = new coin(body);
+
+  try {
+    const result = await newCoin.save();
+
+    if (!result) {
+      throw Error("Couldn't create coin");
+    }
+
+    return res.status(200).json({
+      status: "success",
+      data: result,
+    });
+  } catch (e) {
+    return res.status(400).json({
+      status: "failed",
+      message: "Failed to create coin due to : " + e,
+    });
+  }
+};
+
+const updateCoin = async (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+
+  try {
+    const result = await coin.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!result) {
+      throw Error("Couldn't Update coin");
+    }
+
+    return res.status(200).json({
+      status: "success",
+      data: result,
+    });
+  } catch (e) {
+    return res.status(400).json({
+      status: "failed",
+      message: "Failed to update coin due to : " + e,
+    });
+  }
+};
+
+const deleteCoin = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const result = await coin.findByIdAndDelete(id);
+
+    if (!result) {
+      throw Error("Couldn't Delete coin");
+    }
+
+    return res.status(200).json({
+      status: "success",
+      data: result,
+    });
+  } catch (e) {
+    return res.status(400).json({
+      status: "failed",
+      message: "Failed to delete coin due to : " + e,
+    });
+  }
+};
+
 module.exports = {
   getAllCoins,
   addPriceRecord,
   setUserInfo,
+  getSingleCoin,
+  createCoin,
+  updateCoin,
+  deleteCoin,
 };

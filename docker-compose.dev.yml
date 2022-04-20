@@ -1,0 +1,29 @@
+version: "3"
+services:
+  nginx:
+    ports:
+      - "8080:80"
+  sse-btc-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    environment:
+      - NODE_ENV=development
+      - MONGO_USER=yash
+      - MONGO_PASS=password
+      - MONGO_DB=mongo
+      - MONGO_PORT=27017
+      - REDIS_SECRET=redis
+    command: npm run dev
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/app:ro
+      - /app/node_modules
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=yash
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-db:/data/db
